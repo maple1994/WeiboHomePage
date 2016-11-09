@@ -12,7 +12,7 @@
 #import "RightTableViewController.h"
 #import "MiddleTableViewController.h"
 
-@interface HomePageViewController ()<UITableViewDelegate>
+@interface HomePageViewController ()<BaseTableViewDelegate>
 /// tableHeaderView
 @property (nonatomic, strong) CommonHeaderView *headerView;
 /// 分页栏
@@ -106,18 +106,17 @@
 #pragma mark - 事件处理
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segment
 {
-  UITableViewController *vc = self.childViewControllers[segment.selectedSegmentIndex];
+  BaseTableViewController *vc = self.childViewControllers[segment.selectedSegmentIndex];
   [self setupTableView:vc];
 }
 
 #pragma mark - Private 
 /// 设置tableview相关属性
-- (void)setupTableView:(UITableViewController *)tableViewVC
+- (void)setupTableView:(BaseTableViewController *)tableViewVC
 {
-  
   [self.showingVC.view removeFromSuperview];
   tableViewVC.tableView.showsVerticalScrollIndicator = NO;
-  tableViewVC.tableView.delegate = self;
+  tableViewVC.scrollDelegate = self;
   tableViewVC.view.frame = self.view.bounds;
   tableViewVC.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeaderHeight)];
   [self.view insertSubview:tableViewVC.tableView belowSubview:self.navigationView];
@@ -157,12 +156,15 @@
   return self.isBlack ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
 }
 
-#pragma mark - UITableViewDelegate
-- (void)scrollViewDidScroll:(UITableView *)scrollView
+#pragma mark - BaseTableViewDelegate
+- (void)tableViewDidScroll:(UIScrollView *)scrollView
 {
   CGFloat offY = scrollView.contentOffset.y;
+  // 去除tableview的的contenSize不足以滚动时的bug
+  if(offY == 0)
+    return;
   // 分页栏到达顶部时,固定分页栏
-  if (offY > kHeaderTopHeight - kTopBarHeight)
+  if (offY >= kHeaderTopHeight - kTopBarHeight)
   {
     if(self.headerView.superview != self.view)
     {
@@ -186,7 +188,7 @@
       self.headerView.frame = rect;
     }
   }
-
+  
   // 控制导航条的显示
   if (offY > 0) {
     CGFloat alpha = offY / (kHeaderTopHeight - kTopBarHeight);
@@ -207,21 +209,21 @@
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self setNeedsStatusBarAppearanceUpdate];
   }
+
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)tableViewDidEndDragging:(UIScrollView *)scrollView
 {
   CGFloat offY = scrollView.contentOffset.y;
   NSString *key = [NSString stringWithFormat:@"%p", self.showingVC];
   self.offsetDictonry[key] = @(offY);
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)tableViewDidEndDecelerating:(UIScrollView *)scrollView
 {
   CGFloat offY = scrollView.contentOffset.y;
   NSString *key = [NSString stringWithFormat:@"%p", self.showingVC];
   self.offsetDictonry[key] = @(offY);
-
 }
 
 #pragma mark - getter

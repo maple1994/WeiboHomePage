@@ -23,6 +23,7 @@
 		F528B0DB1DB31F1A00001479 /* MiddleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F528B0DA1DB31F1A00001479 /* MiddleTableViewController.m */; };
 		F528B0DE1DB31F2200001479 /* RightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F528B0DD1DB31F2200001479 /* RightTableViewController.m */; };
 		F528B0E71DB37B9B00001479 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F528B0E61DB37B9B00001479 /* MyNavigationController.m */; };
+		F579FBE41DD3721E00C6030F /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F579FBE31DD3721E00C6030F /* BaseTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		F528B0DD1DB31F2200001479 /* RightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightTableViewController.m; sourceTree = "<group>"; };
 		F528B0E51DB37B9B00001479 /* MyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNavigationController.h; sourceTree = "<group>"; };
 		F528B0E61DB37B9B00001479 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
+		F579FBE21DD3721E00C6030F /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
+		F579FBE31DD3721E00C6030F /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,8 @@
 				F528B0DD1DB31F2200001479 /* RightTableViewController.m */,
 				F528B0E51DB37B9B00001479 /* MyNavigationController.h */,
 				F528B0E61DB37B9B00001479 /* MyNavigationController.m */,
+				F579FBE21DD3721E00C6030F /* BaseTableViewController.h */,
+				F579FBE31DD3721E00C6030F /* BaseTableViewController.m */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 				F528B09C1DB310E100001479 /* AppDelegate.m in Sources */,
 				F528B0DB1DB31F1A00001479 /* MiddleTableViewController.m in Sources */,
 				F528B0991DB310E100001479 /* main.m in Sources */,
+				F579FBE41DD3721E00C6030F /* BaseTableViewController.m in Sources */,
 				F528B0D81DB31F1000001479 /* LeftTableViewController.m in Sources */,
 				F528B0D01DB312EE00001479 /* HMSegmentedControl.m in Sources */,
 				F528B0DE1DB31F2200001479 /* RightTableViewController.m in Sources */,
@@ -552,6 +558,7 @@
 				F528B0C31DB310E100001479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F528B0C41DB310E100001479 /* Build configuration list for PBXNativeTarget "WeiboHomePageTests" */ = {
 			isa = XCConfigurationList;
@@ -560,6 +567,7 @@
 				F528B0C61DB310E100001479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F528B0C71DB310E100001479 /* Build configuration list for PBXNativeTarget "WeiboHomePageUITests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +576,7 @@
 				F528B0C91DB310E100001479 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
