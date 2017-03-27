@@ -44,5 +44,13 @@
   }
 }
 
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView
+{
+  if([self.scrollDelegate respondsToSelector:@selector(tableViewDidScrollToTop:)])
+  {
+    [self.scrollDelegate tableViewDidScrollToTop:scrollView];
+  }
+}
+
 
 @end

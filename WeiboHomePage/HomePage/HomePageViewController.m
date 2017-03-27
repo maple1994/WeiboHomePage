@@ -122,7 +122,7 @@
   [self.view insertSubview:tableViewVC.tableView belowSubview:self.navigationView];
   
   /**********************以下是设置偏移量*********************************/
-  // 取出当前展示的控制器的便宜量Y
+  // 取出当前展示的控制器的偏移量Y
   NSString *currentVCKey = [NSString stringWithFormat:@"%p", self.showingVC];
   CGFloat currentOffY = [self.offsetDictonry[currentVCKey] floatValue];
   // 取出将要展示控制器的偏移量Y
@@ -154,6 +154,31 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
   return self.isBlack ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+}
+
+/// 设置导航栏
+- (void)setupBarWihtOffsetY:(CGFloat)offY
+{
+  // 控制导航条的显示
+  if (offY > 0) {
+    CGFloat alpha = offY / (kHeaderTopHeight - kTopBarHeight);
+    self.navigationView.alpha = alpha;
+    
+    if (alpha > 0.6 && !self.isBlack) {
+      self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+      self.black = YES;
+      [self setNeedsStatusBarAppearanceUpdate];
+    } else if (alpha <= 0.6 && self.isBlack) {
+      self.black = NO;
+      self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+      [self setNeedsStatusBarAppearanceUpdate];
+    }
+  } else {
+    self.navigationView.alpha = 0;
+    self.black = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self setNeedsStatusBarAppearanceUpdate];
+  }
 }
 
 #pragma mark - BaseTableViewDelegate
@@ -188,28 +213,8 @@
       self.headerView.frame = rect;
     }
   }
-  
   // 控制导航条的显示
-  if (offY > 0) {
-    CGFloat alpha = offY / (kHeaderTopHeight - kTopBarHeight);
-    self.navigationView.alpha = alpha;
-    
-    if (alpha > 0.6 && !self.isBlack) {
-      self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-      self.black = YES;
-      [self setNeedsStatusBarAppearanceUpdate];
-    } else if (alpha <= 0.6 && self.isBlack) {
-      self.black = NO;
-      self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-      [self setNeedsStatusBarAppearanceUpdate];
-    }
-  } else {
-    self.navigationView.alpha = 0;
-    self.black = NO;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self setNeedsStatusBarAppearanceUpdate];
-  }
-
+  [self setupBarWihtOffsetY:offY];
 }
 
 - (void)tableViewDidEndDragging:(UIScrollView *)scrollView
@@ -224,6 +229,17 @@
   CGFloat offY = scrollView.contentOffset.y;
   NSString *key = [NSString stringWithFormat:@"%p", self.showingVC];
   self.offsetDictonry[key] = @(offY);
+  [self setupBarWihtOffsetY:offY];
+}
+
+- (void)tableViewDidScrollToTop:(UIScrollView *)scrollView
+{
+  // 滚动到顶部时，所有偏移量都置为0
+  NSArray *allkeys = self.offsetDictonry.allKeys;
+  for (NSString *key in allkeys)
+  {
+    self.offsetDictonry[key] = @(0);
+  }
 }
 
 #pragma mark - getter
