@@ -20,7 +20,7 @@
 /// 用来显示用户名的导航栏，只有当分页栏定在顶部时，才显示
 @property (nonatomic, weak) UIView *navigationView;
 /// 记录正在展示的控制器
-@property (nonatomic, weak) UIViewController *showingVC;
+@property (nonatomic, weak) BaseTableViewController *showingVC;
 /// 记录每个tableview的偏移量的字典
 @property (nonatomic, strong) NSMutableDictionary *offsetDictonry;
 /// 分页栏是否固定在顶部
@@ -114,6 +114,9 @@
 /// 设置tableview相关属性
 - (void)setupTableView:(BaseTableViewController *)tableViewVC
 {
+  // 由于执行removeFromSuperview时，会触发代理，执行代理会offset会出现问题，
+  // 为了排除这种情况，这里代理设置为空
+  self.showingVC.scrollDelegate = nil;
   [self.showingVC.view removeFromSuperview];
   tableViewVC.tableView.showsVerticalScrollIndicator = NO;
   tableViewVC.scrollDelegate = self;
@@ -145,7 +148,7 @@
   {
     tableViewVC.tableView.contentOffset = CGPointMake(0, currentOffY);
     offY = currentOffY;
-    [tableViewVC.tableView addSubview:self.headerView];
+    [tableViewVC.tableView addSubview:_headerView];
   }
   self.offsetDictonry[newVCKey] = @(offY);
   self.showingVC = tableViewVC;
