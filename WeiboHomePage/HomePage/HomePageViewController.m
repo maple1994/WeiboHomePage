@@ -230,6 +230,9 @@
 - (void)tableViewDidEndDecelerating:(UIScrollView *)scrollView
 {
   CGFloat offY = scrollView.contentOffset.y;
+    if (offY < 0) {
+        offY = 0;
+    }
   NSString *key = [NSString stringWithFormat:@"%p", self.showingVC];
   self.offsetDictonry[key] = @(offY);
   [self setupBarWihtOffsetY:offY];

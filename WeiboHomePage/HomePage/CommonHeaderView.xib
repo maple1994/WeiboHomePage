@@ -19,10 +19,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="345" height="211"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="h4" translatesAutoresizingMaskIntoConstraints="NO" id="bzP-fq-k6h">
-                            <rect key="frame" x="0.0" y="-149" width="345" height="360"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="360" id="UdW-vZ-XxU"/>
-                            </constraints>
+                            <rect key="frame" x="0.0" y="0.0" width="345" height="211"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Avata2" translatesAutoresizingMaskIntoConstraints="NO" id="SHN-6D-yVu">
                             <rect key="frame" x="135" y="50" width="75" height="75"/>
@@ -56,6 +53,7 @@
                         <constraint firstItem="bzP-fq-k6h" firstAttribute="leading" secondItem="K0J-xb-jQ9" secondAttribute="leading" id="ggX-Yv-Rfg"/>
                         <constraint firstItem="0FO-V5-HiT" firstAttribute="top" secondItem="SHN-6D-yVu" secondAttribute="bottom" constant="10" id="nAn-EU-KTA"/>
                         <constraint firstItem="0FO-V5-HiT" firstAttribute="centerX" secondItem="K0J-xb-jQ9" secondAttribute="centerX" id="pEy-bN-UOu"/>
+                        <constraint firstItem="bzP-fq-k6h" firstAttribute="top" secondItem="K0J-xb-jQ9" secondAttribute="top" id="qKp-cC-IWr"/>
                         <constraint firstAttribute="bottom" secondItem="bzP-fq-k6h" secondAttribute="bottom" id="rtg-W9-xWH"/>
                     </constraints>
                     <variation key="default">
